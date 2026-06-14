@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soho Life — Townsend House</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; color: #2a3518; background: #f5f2eb; }
+  a { color: inherit; text-decoration: none; }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 2.5rem; background: #f5f2eb; border-bottom: 1px solid #d4cdb8; position: sticky; top: 0; z-index: 100; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+  .nav-links { display: flex; align-items: center; gap: 1.8rem; }
+  .nav-links a { font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6a7a4a; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: #2a3518; }
+  .nav-cta { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.5rem 1.3rem; background: #4a5a2e; color: #f5f2eb; border: none; cursor: pointer; }
+
+  .hero { background: #3a4820; padding: 5rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(200,212,160,0.08) 0%, transparent 70%); }
+  .hero-tag { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: #a8b87a; margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.2rem; color: #f5f2eb; font-weight: 400; line-height: 1.15; margin-bottom: 1.2rem; }
+  .hero p { font-size: 1rem; color: rgba(245,242,235,0.75); max-width: 580px; margin: 0 auto; line-height: 1.8; font-style: italic; font-family: 'Playfair Display', serif; }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 4rem 2.5rem; }
+  .sec-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: #8a9a6a; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid #d4cdb8; }
+  .section { margin-bottom: 4rem; }
+
+  .intro-text { font-family: 'Playfair Display', serif; font-size: 1.18rem; line-height: 1.8; color: #3a4a20; margin-bottom: 1.5rem; }
+  .body-text { font-size: 0.92rem; color: #4a5a38; line-height: 1.9; margin-bottom: 1rem; }
+
+  /* Category cards */
+  .cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #d4cdb8; margin-top: 1.5rem; }
+  .cat { background: #f5f2eb; padding: 1.75rem 1.5rem; }
+  .cat-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+  .cat-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #2a3518; margin-bottom: 0.6rem; font-weight: 400; }
+  .cat-body { font-size: 0.83rem; color: #5a6a40; line-height: 1.8; margin-bottom: 1rem; }
+  .cat-picks { list-style: none; }
+  .cat-picks li { font-size: 0.8rem; color: #4a5a38; padding: 0.35rem 0; border-bottom: 1px solid #e8e4d8; display: flex; align-items: baseline; gap: 0.5rem; }
+  .cat-picks li::before { content: '→'; color: #8a9a6a; flex-shrink: 0; font-size: 0.7rem; }
+  .pick-name { font-weight: 500; }
+  .pick-note { color: #8a9a6a; font-size: 0.75rem; }
+
+  /* Pull quote */
+  .pull-quote { background: #4a5a2e; padding: 3rem 3.5rem; margin: 3rem 0; text-align: center; }
+  .pull-quote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.4rem; color: #f5f2eb; line-height: 1.6; }
+  .pull-quote cite { display: block; margin-top: 1rem; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #a8b87a; font-style: normal; font-family: 'Inter', sans-serif; }
+
+  /* Walk time strip */
+  .walk-strip { background: #eeeae0; padding: 2rem 2.5rem; }
+  .walk-strip h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: #2a3518; font-weight: 400; margin-bottom: 1.25rem; }
+  .walk-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: #d4cdb8; }
+  .walk-item { background: #f5f2eb; padding: 1rem; text-align: center; }
+  .walk-time { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #4a5a2e; display: block; }
+  .walk-place { font-size: 0.7rem; color: #6a7a50; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; display: block; }
+
+  .cta-band { background: #3a4820; padding: 3rem 2.5rem; text-align: center; }
+  .cta-band h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #f5f2eb; font-weight: 400; margin-bottom: 0.6rem; }
+  .cta-band p { font-size: 0.85rem; color: #c8d4a0; margin-bottom: 1.5rem; }
+  .cta-btn { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.85rem 2rem; background: #f5f2eb; color: #2a3518; border: none; cursor: pointer; margin: 0 0.4rem; transition: background 0.2s; }
+  .cta-btn:hover { background: #e8e4d8; }
+
+  footer { background: #4a5a2e; padding: 1.75rem 2.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-left { font-size: 0.75rem; color: #a8b87a; }
+  .footer-right { display: flex; gap: 1.5rem; }
+  .footer-right a { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #c8d4a0; border-bottom: 1px solid rgba(200,212,160,0.3); }
+
+  @media(max-width:700px){
+    .cat-grid { grid-template-columns: 1fr; }
+    .walk-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 0.8rem; }
+    .pull-quote { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Townsend House</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="photos.html">Photos</a>
+    <a href="flat.html">The Flat</a>
+    <a href="location.html">Location</a>
+    <a href="soho.html" class="active">Soho Life</a>
+    <a href="contact.html">Contact</a>
+    <a href="tel:02038403334"><button class="nav-cta">Call agent</button></a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">The neighbourhood</div>
+  <h1>Life in Soho</h1>
+  <p>"London's most irresistible square mile — where you can eat brilliantly, drink late, see great art and walk to the West End, all without getting in a cab."</p>
+</div>
+
+<div class="wrap">
+
+  <div class="section">
+    <div class="sec-label">The neighbourhood</div>
+    <p class="intro-text">Soho is unlike anywhere else in London. Compact, dense, endlessly surprising — it has been the city's creative and bohemian heartland for over a century, and it shows no signs of losing its edge.</p>
+    <p class="body-text">Deans Street sits at the very centre of it. Walk out of the front door and within a minute you're in the thick of it: the smell of fresh coffee from a dozen independent cafés, the rumble of deliveries to Michelin-starred kitchens, the neon signs of jazz bars that have been open since the 1950s. It's a neighbourhood that genuinely never sleeps — and living here puts you at the heart of one of the world's great cities.</p>
+    <p class="body-text">Yet for all its energy, Soho also has a neighbourhood feel that surprises most people. Locals know the butcher on Berwick Street, the barista who saves them a seat, the best quiet table at the back of the French House on a Tuesday afternoon. This is London at its most alive — and Townsend House puts you right in the middle of it.</p>
+  </div>
+
+  <div class="section">
+    <div class="sec-label">Food & drink</div>
+    <div class="cat-grid">
+      <div class="cat">
+        <div class="cat-icon">🍽️</div>
+        <div class="cat-title">Restaurants</div>
+        <div class="cat-body">Soho has one of the highest concentrations of good restaurants anywhere in Europe — from corner ramen joints to Michelin-starred rooms, all within walking distance.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">Bao Soho</span><span class="pick-note">— Lexington St, iconic Taiwanese</span></li>
+          <li><span class="pick-name">Barrafina</span><span class="pick-note">— Dean Street, exceptional tapas</span></li>
+          <li><span class="pick-name">Kiln</span><span class="pick-note">— Brewer St, Thai wood-fire cooking</span></li>
+          <li><span class="pick-name">Quo Vadis</span><span class="pick-note">— Dean Street, classic British</span></li>
+          <li><span class="pick-name">Brasserie Zédel</span><span class="pick-note">— Sherwood St, grand Parisian brasserie</span></li>
+        </ul>
+      </div>
+      <div class="cat">
+        <div class="cat-icon">☕</div>
+        <div class="cat-title">Coffee & cafés</div>
+        <div class="cat-body">The independent café scene in Soho punches well above its weight. You're never more than a two-minute walk from an excellent flat white.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">Flat White</span><span class="pick-note">— Berwick St, where it all started</span></li>
+          <li><span class="pick-name">Monmouth Coffee</span><span class="pick-note">— Covent Garden, five minutes away</span></li>
+          <li><span class="pick-name">Crosstown</span><span class="pick-note">— Wardour St, brilliant doughnuts</span></li>
+          <li><span class="pick-name">Bar Italia</span><span class="pick-note">— Frith St, open since 1949</span></li>
+          <li><span class="pick-name">Milk Beach</span><span class="pick-note">— Noel St, Australian-style all-day</span></li>
+        </ul>
+      </div>
+      <div class="cat">
+        <div class="cat-icon">🍸</div>
+        <div class="cat-title">Bars & pubs</div>
+        <div class="cat-body">From legendary literary pubs to intimate cocktail bars, Soho's drinking scene is unmatched. You'll find your own regulars within the first week.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">The French House</span><span class="pick-note">— Dean St, Soho institution since 1914</span></li>
+          <li><span class="pick-name">Ronnie Scott's Jazz Club</span><span class="pick-note">— Frith St, world-famous</span></li>
+          <li><span class="pick-name">Swift</span><span class="pick-note">— Old Compton St, award-winning cocktails</span></li>
+          <li><span class="pick-name">Milk & Honey</span><span class="pick-note">— Poland St, speakeasy-style</span></li>
+          <li><span class="pick-name">The Dog & Duck</span><span class="pick-note">— Bateman St, classic Victorian pub</span></li>
+        </ul>
+      </div>
+      <div class="cat">
+        <div class="cat-icon">🛍️</div>
+        <div class="cat-title">Shopping & markets</div>
+        <div class="cat-body">Carnaby Street, Oxford Street, and Berwick Street Market are on your doorstep. For groceries, Soho has independents for everything.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">Berwick Street Market</span><span class="pick-note">— fruit, veg & street food</span></li>
+          <li><span class="pick-name">Carnaby Street</span><span class="pick-note">— fashion & lifestyle, 3 min walk</span></li>
+          <li><span class="pick-name">Oxford Street</span><span class="pick-note">— major retail, 8 min walk</span></li>
+          <li><span class="pick-name">Foyles</span><span class="pick-note">— Charing Cross Rd, legendary bookshop</span></li>
+          <li><span class="pick-name">Gosh! Comics</span><span class="pick-note">— Berwick St, cult graphic novels</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="pull-quote">
+  <p>"Soho is the only place in London where you can have a Michelin-starred lunch, catch a jazz set, browse a record shop and be home in three minutes — all on a Tuesday."</p>
+  <cite>On living in Soho W1D</cite>
+</div>
+
+<div class="walk-strip">
+  <div style="max-width:900px; margin:0 auto;">
+    <h3>Everything within walking distance</h3>
+    <div class="walk-grid">
+      <div class="walk-item"><span class="walk-time">2 min</span><span class="walk-place">Berwick St Market</span></div>
+      <div class="walk-item"><span class="walk-time">3 min</span><span class="walk-place">Carnaby Street</span></div>
+      <div class="walk-item"><span class="walk-time">4 min</span><span class="walk-place">Ronnie Scott's</span></div>
+      <div class="walk-item"><span class="walk-time">5 min</span><span class="walk-place">Chinatown</span></div>
+      <div class="walk-item"><span class="walk-time">6 min</span><span class="walk-place">Leicester Square</span></div>
+      <div class="walk-item"><span class="walk-time">7 min</span><span class="walk-place">Covent Garden</span></div>
+      <div class="walk-item"><span class="walk-time">8 min</span><span class="walk-place">Oxford Street</span></div>
+      <div class="walk-item"><span class="walk-time">10 min</span><span class="walk-place">Trafalgar Square</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:3rem; padding-bottom:2rem;">
+  <div class="section">
+    <div class="sec-label">Arts & culture</div>
+    <div class="cat-grid">
+      <div class="cat">
+        <div class="cat-icon">🎭</div>
+        <div class="cat-title">Theatre & film</div>
+        <div class="cat-body">The West End is literally on your doorstep. Shaftesbury Avenue — London's theatre district — is a four-minute walk. The Prince Charles Cinema on Leicester Square shows cult classics and arthouse films nightly.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">Shaftesbury Avenue</span><span class="pick-note">— 4 min, West End theatres</span></li>
+          <li><span class="pick-name">Prince Charles Cinema</span><span class="pick-note">— 6 min, cult & arthouse</span></li>
+          <li><span class="pick-name">Soho Theatre</span><span class="pick-note">— Dean St, cutting-edge new work</span></li>
+          <li><span class="pick-name">Curzon Soho</span><span class="pick-note">— Shaftesbury Ave, indie cinema</span></li>
+        </ul>
+      </div>
+      <div class="cat">
+        <div class="cat-icon">🎵</div>
+        <div class="cat-title">Music & nightlife</div>
+        <div class="cat-body">Soho remains one of London's great music neighbourhoods. From jazz to electronic, the venues within ten minutes of Deans Street cover every taste.</div>
+        <ul class="cat-picks">
+          <li><span class="pick-name">Ronnie Scott's</span><span class="pick-note">— Frith St, world-class jazz nightly</span></li>
+          <li><span class="pick-name">100 Club</span><span class="pick-note">— Oxford St, legendary live music</span></li>
+          <li><span class="pick-name">Fabric</span><span class="pick-note">— Farringdon, 20 min, iconic club</span></li>
+          <li><span class="pick-name">Pizza Express Jazz Club</span><span class="pick-note">— Dean St, intimate live jazz</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band">
+  <h2>Ready to make Soho home?</h2>
+  <p>Townsend House · Deans Street · Available 18 July 2026 · £3,900 pcm</p>
+  <a href="contact.html"><button class="cta-btn">Enquire now</button></a>
+  <a href="index.html"><button class="cta-btn" style="background:transparent; color:#f5f2eb; border:1px solid rgba(245,242,235,0.3);">Back to listing</button></a>
+</div>
+
+<footer>
+  <div class="footer-left">Townsend House · Deans Street, Soho, London W1D · Marketed by Talbies, Whetstone</div>
+  <div class="footer-right">
+    <a href="photos.html">Photos</a>
+    <a href="flat.html">The Flat</a>
+    <a href="location.html">Location</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
